@@ -1,13 +1,19 @@
 import time
-from world import utilities
+
+class utilities:
+    def slowtype(text):
+        for char in text():
+            print(char, end='', flush=True)
+            time.sleep(0.05)
 
 class Opening:
     def intro():
-        return (
-                'Welcome to your life.'
-                '\nYou have hit rock bottom, and are rebuilding from scratch...'
-                '\nWhat is your name?'
-                )
+        return ('Welcome to your life.'
+               '\n'
+               '\nYou have hit rock bottom, and are rebuilding from scratch...'
+               '\n'
+               '\nWhat is your name?'
+              )
 class Tavern:
     def intro(self):
         return (
@@ -44,10 +50,9 @@ class JobBoard:
 
 
 if __name__ == "__main__":
-    narrate = intro=()
-    world.slowprint(narrate)
-    name = input()
-    print("Good luck picking up the pieces, " +name+ ".")      
+    utilities.slowtype(Opening.intro)
+    name = input("what is your")
+    utilities.slowtype()    
 
 
 
