@@ -1,0 +1,3 @@
+def slowprint():
+        for char in Opening.intro():
+        print(char, end='', flush=True)
