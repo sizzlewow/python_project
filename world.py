@@ -16,11 +16,11 @@ class WorldMap:
 class OpeningTile():
 
     def start_text():
-        return ('Welcome to your life.'
+        intro = ('Welcome to your life.'
                '\n'
                '\nYou have hit rock bottom, and are rebuilding from scratch...'
                 )
-
+        utilities.slowPrint(intro)
 class TavernTile():
     
     def stay():
