@@ -1,110 +1,132 @@
+# Importing external modules
+# Random for varied responses from tiles
+# numpy for buildmap
+# npc contains npc classes
+# helper for utility functions to improve ui
+
 import random
-# from itertools import product
 import numpy as np
-from drunkard import BarTender
+from npc import BarTender
 from helper import utilities
+from player import user
 
 
-class WorldMap:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+class OpeningTile:
 
-    def start_text(self):
-        pass
+    intro = ('Welcome to your life.'
+        '\n'
+        '\nYou have hit rock bottom, and are rebuilding from scratch...'
+        '\n')
+    def start():
+        print("\n"*300)
+        if user.state == True:    
+            utilities.slowPrint(OpeningTile.intro)
+        else:
+            StreetTile.start()
 
-class OpeningTile():
+class TavernTile:
 
-    def start_text():
-        intro = ('Welcome to your life.'
-               '\n'
-               '\nYou have hit rock bottom, and are rebuilding from scratch...'
-                '\n')
-        utilities.slowPrint(intro)
-class TavernTile():
-    
-    def stay():
-            return ("I really shouldn't...perhaps one drink isn't so bad though")
-
-    def start_text():
-        intro = (
-                'The smell of yesterday\'s mead reminds'
-                # '\nyou to get back to work...'
-                # '\n\"Why am I here,\"you think to yourself, \"I need to find a job,'
-                # '\n where\'s the job board in this town anyway?'
+    status = (
+                "Ah...The smell of yesterday's mead...",
+                "It's the ale house!",
+                "I seem to have found the local dive bar."
                 )
-        utilities.slowPrint(intro)
+    
+    stay = "I really shouldn't...perhaps one drink isn't so bad though"
 
+    leave = "Time to get back on the wagon!"
+
+    def start():
+        print("\n"*300)
+        utilities.slowPrint(random.choice(TavernTile.status))
         while True:
             choice = input("stay or leave? ")
             if choice == "stay":
-                print("\n")
+                print("\n"*300)
                 BarTender.choice()
-
             elif choice == "leave":
-                print("\n")
-                return (
-                        'Time to get back on the wagon!'
-                        )
-
-            elif choice not in ["stay", "leave"]:
+                print("\n"*300)
+                utilities.slowPrint(TavernTile.leave)
+                break
+            elif choice == "":
+                print("\n"*300)
                 utilities.slowPrint("I can't just stand here...\n")
+            elif choice not in ["stay", "leave"]:
+                print("\n"*300)
+                print("invalid choice")
+                
+
 
   
-class JobBoard():
+class JobBoard:
 
-    def start_text():
-        jobs_status = (
-                'You track down the job board.\n'
-                '...got here too late.\n'
-                'You find two jobs posted.\n'
-                )
-        return (random.choice(jobs_status))
+    status = (
+            'You track down the job board.',
+            '...got here too late.',
+            'You find two jobs posted.'
+            )
+    job1 = "BAKERY IN SEARCH OF WIZARD!"
+    job2 = "BUTCHER NEEDS RAT CATCHER!"
 
-    def bakery():
-        return ('BAKERY IN SEARCH OF WIZARD...\n')
+    def start():
+        print("\n"*300)
+        utilities.slowPrint(random.choice(JobBoard.status))
+        while True:
+            choice = input("read or leave\n")
+            if choice == "read":
+                print("\n"*300)
+                utilities.slowPrint(JobBoard.job1)
+                utilities.slowPrint(JobBoard.job2)
+            elif choice == "leave":
+                print("\n"*300)
+                break
                 
-    def butcher():
-        return ('BUTCHER NEEDS RAT CATCHER!\n')
     
-class DoogansBakery():
+class DoogansBakery:
 
-    def start_text():
-        bakery_status = ('You smell fresh baked bread, must be a bakery!\n'
-                'Welcome to Doogan\'s Bakery!  What can we get for you?\n'
-                )
-        return (random.choice(bakery_status))
+    status = (
+            'You smell fresh baked bread, must be a bakery!',
+            'Welcome to Doogan\'s Bakery!  What can we get for you?'
+            )
 
-class ManksMeats():
+    def start():
+        print("\n"*300)
+        utilities.slowPrint(random.choice(DoogansBakery.status))
 
-    def start_text():
-        butcher_status = (
-                        'Just a minute...er..Welcome to Mank\'s Meats!\n'
-                        'Lookin for meat?\n'
-                        )
-        return (random.choice(butcher_status))
+class ManksMeats:
 
-class StreetTile():
+    status = (
+            'Just a minute...er..Welcome to Mank\'s Meats!',
+            'Lookin for meat?'
+            )
+    
+    def start():
+        print("\n"*300)
+        utilities.slowPrint(random.choice(ManksMeats.status))
+
+class StreetTile:
+
+    status = (
+            'The street is bustling with busy folks',
+            'The street is oddly empty right now, perhaps the hive-mind decided to stay home',
+            'The street is alive with celebration, did I forget about a holiday?'
+            )    
    
-    def start_text():
-        
-        street_status = (
-                        'The street is bustling with busy folks',
-                        'The street is oddly empty right now, perhaps the hive-mind decided to stay home',
-                        'The street is alive with celebration, did I forget about a holiday?'
-                        )
-        return (random.choice(street_status))
+    def start():
+        print("\n"*300)
+        utilities.slowPrint(random.choice(StreetTile.status))
     
-class EdgeEnd():
+class EdgeEnd:
 
-    def start_text():
+    status = (
+            "I can't go any further...",
+            "There's something blocking my path...",
+            "Beyond here be dragons...",
+            )    
 
-        boundary = (
-                    "I can't go any further...",
-                    "There's something blocking my path...",
-                    "Beyond here be dragons...",
-                    )
-        return(random.choice(boundary))
+    def start():
+        print("\n"*300)
+        print(random.choice(EdgeEnd.status))
     
 
 
@@ -114,7 +136,7 @@ class buildMap():
     def assign_tiles():
         tile_map = [["EE","EE","EE","EE","EE","EE","EE"],
                     ["EE","ST","ST","ST","ST","ST","EE"],
-                    ["EE","ST","ST","ST","ST","DB","EE"],
+                    ["EE","OT","ST","ST","ST","DB","EE"],
                     ["EE","TT","JB","ST","MM","ST","EE"],
                     ["EE","EE","EE","EE","EE","EE","EE"]]
         mapMatrix = np.array(tile_map, dtype='str_')

@@ -30,7 +30,6 @@ matrixdim = mapMatrix.shape
 y_end = matrixdim[0]
 x_end = matrixdim[1]
 tile = tile_dict()
-print(assign_tiles())
 x = 1
 y = 1
 
@@ -41,50 +40,50 @@ while True:
         y -= 1
         if (y < 1):
             y +=1
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
         else:
             direction = (mapMatrix[y, x])
             print(direction)
             print(y, x)
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
     elif traverse == "s":
         y += 1
         if (y > 3):
             y -= 1
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
         else:        
             direction = (mapMatrix[y, x])
             print(0 <= int(y) <= 2)
             print(direction)
             print(y, x)
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
     elif traverse == "w":
         x -= 1
         if (x < 1):
             x += 1
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
         else:
             direction = (mapMatrix[y, x])
             print(direction)
             print(y, x)
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
     elif traverse == "e":
         x += 1
         if (x > 5):
             x -= 1
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
         else:
             direction = (mapMatrix[y, x])
             print(direction)
             print(y, x)
-            location = (tile[direction].start_text())
+            location = (tile[direction].start())
             utilities.slowPrint(location)
     elif traverse == "map":
         playermap[y,x]="O"
@@ -108,4 +107,3 @@ while True:
 #         x += 1
 #         print("There's a wall here.")
 ##  need to limit movement to within range of array and prevent loopback.
-
