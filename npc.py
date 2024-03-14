@@ -1,11 +1,9 @@
 # Importing external modules
-# game for movement and interaction
 # helper for utility functions to improve ui
-# player for user data and state
+# player for User data and state
 
-from game import Movement
 from helper import utilities
-from player import user
+from player import User
 
 class BarTender:
     
@@ -19,27 +17,32 @@ class BarTender:
 
     leave = "...actually, I really shouldn't."
 
-
-###FIX THIS BLOCK, Loop not exiting, and can't handle non integer input.
     def choice():
         while True:
-            choice = input("How many should I have? ")
-            if choice == 1:
-                utilities.slowPrint(BarTender.onedrink)
-                break
-            elif int(choice) == 2:
-                utilities.slowPrint(BarTender.twodrinks)
-                break
-            elif int(choice) == 3:
-                utilities.slowPrint(BarTender.threedrinks)
-                break
-            elif int(choice) < 1 or choice == "leave":
-                utilities.slowPrint(BarTender.leave)
-                break
-            elif int(choice) > 3:
-                user.playerstate(user, True)
-                utilities.slowPrint(BarTender.manydrinks)
-                user.start_position(user, 2, 1)
-                break
-            else:
+            choice = int(input("How many should I have? "))
+
+            if not isinstance(choice, int):
                 print("invalid input\n")
+                continue
+            else:                
+                if choice == 1:
+                    utilities.slowPrint(BarTender.onedrink)
+                    utilities.slowPrint("*"*100)
+                    break
+                elif choice == 2:
+                    utilities.slowPrint(BarTender.twodrinks)
+                    utilities.slowPrint("*"*100)
+                    break
+                elif choice == 3:
+                    utilities.slowPrint(BarTender.threedrinks)
+                    utilities.slowPrint("*"*100)
+                    break
+                elif choice > 3:
+                    User.playerstate(User, True)
+                    utilities.slowPrint(BarTender.manydrinks)
+                    User.start_position(User, 2, 1)
+                    utilities.slowPrint("*"*100)
+                    break
+                elif choice == 0:
+                    utilities.slowPrint(BarTender.leave)
+                    break

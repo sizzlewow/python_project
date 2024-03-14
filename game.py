@@ -5,34 +5,47 @@
 
 import numpy as np
 from helper import utilities
-from player import user
+from player import User
 
 
+# GameMenu requests the user enter a name, greets them with that name, 
+# then presents a status list and requires entry of the name entered to continue.
 
+class GameMenu:
 
-# class BuildCharacter():
-
-#     def playername():
-#         user(input('\nwhat is your name?'))
-#         output = ("Time to pick up the pieces, " +  + "\n")
-#         utilities.slowPrint(output)
+    def new_char():
+        newname = input("What is your name?\n")
+        User.player_name(User,newname)
+        utilities.slowPrint("Time for an adventure," + User.name + "!")
     
-                
-class Movement():
+    def main_menu():
+        print("Name: ", User.name)
+        print(User.state)
+        print("Current coords: ", User.y, User.x)
+        
+        while True:
+            if input("Enter your name and press enter to continue") == User.name:
+                Movement.where_to()
+            else:
+                print("Do you not even know your name?")
 
-    last_loc = None
+
+# Movement Class currently only contains one function to facilitate movement around the map.
+                               
+class Movement:
     
     def where_to():
         from world import buildMap
         mapMatrix = buildMap.assign_tiles() # 2d Array used for game map
         tile = buildMap.tile_dict() # Dictionary containing worldmap class names and abbreviated keys.
-        y, x = user.y, user.x # Player starting coords, stored in player module
+        y, x = User.y, User.x # Player starting coords, stored in player module
         location = (mapMatrix[y, x]) # Abbreviated tile name on map.
 
         while True:
             playermap = np.copy(mapMatrix) # Copy of worldmap updated to show player location.
+            
             choice = input("\n[which location (n,s,e,w)]")
-
+            
             if choice == "n":
                 y -= 1
                 if (y < 1):

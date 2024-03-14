@@ -8,8 +8,11 @@ import random
 import numpy as np
 from npc import BarTender
 from helper import utilities
-from player import user
+from player import User
 
+# Classes here all represent map tile types and their attributes (except buildMap).
+# All contain a function to print intro/status text upon entry.
+# Some contain functions to facilitate user interaction through choices.
 
 class OpeningTile:
 
@@ -19,7 +22,7 @@ class OpeningTile:
         '\n')
     def start():
         print("\n"*300)
-        if user.state == True:    
+        if User.state == True:    
             utilities.slowPrint(OpeningTile.intro)
         else:
             StreetTile.start()
@@ -44,6 +47,7 @@ class TavernTile:
             if choice == "stay":
                 print("\n"*300)
                 BarTender.choice()
+                break
             elif choice == "leave":
                 print("\n"*300)
                 utilities.slowPrint(TavernTile.leave)
@@ -55,9 +59,7 @@ class TavernTile:
                 print("\n"*300)
                 print("invalid choice")
                 
-
-
-  
+ 
 class JobBoard:
 
     status = (
@@ -92,6 +94,7 @@ class DoogansBakery:
     def start():
         print("\n"*300)
         utilities.slowPrint(random.choice(DoogansBakery.status))
+
 
 class ManksMeats:
 
@@ -130,7 +133,11 @@ class EdgeEnd:
     
 
 
-
+# The buildMap class contains functions to generate the map and facilitate associating
+# the above classes with their respecitive positions on it.
+# I have used numpy.array to build the matrix, though it probably wasn't entirely needed.
+# This is mostly used by Movement in game.py
+        
 class buildMap():
 
     def assign_tiles():
