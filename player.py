@@ -1,11 +1,15 @@
-from world import *
 
 
-class Player:
-    def __init__(self):
-        self.x = startlocation[0]
-        self.y = startlocation[0]
-        self.name = None
 
-        pass
-    
+class user:
+    y = 2
+    x = 2
+    name = None
+    def __init__(self, name, y, x):
+        self.name = name
+        self.y = y
+        self.x = x
+
+    def start_position(cls, y, x):
+        cls.y = y
+        cls.x = x

@@ -1,15 +1,17 @@
 import time
 import numpy as np
 from helper import utilities
+from player import user
 
 
 
-class BuildCharacter():
 
-    def playername():
-        player = input('\nwhat is your name?')
-        output = ("Time to pick up the pieces, " + player + "\n")
-        utilities.slowPrint(output)
+# class BuildCharacter():
+
+#     def playername():
+#         user(input('\nwhat is your name?'))
+#         output = ("Time to pick up the pieces, " +  + "\n")
+#         utilities.slowPrint(output)
     
                 
 class Movement():
@@ -18,111 +20,69 @@ class Movement():
         from world import buildMap
         mapMatrix = buildMap.assign_tiles()
         tile = buildMap.tile_dict()
-        print(buildMap.assign_tiles())
-        x, y = [2, 2]
-        direction = (mapMatrix[y, x])
-        print(mapMatrix.shape)
-        print(mapMatrix.shape[0])
-        print(mapMatrix.shape[1])
-    
+        # print(buildMap.assign_tiles())
+        y, x = user.y, user.x
+        location = (mapMatrix[y, x])
+        print(user.y, user.x)
 
         while True:
             playermap = np.copy(mapMatrix)
-            traverse = input("\n[which direction (n,s,e,w)]")
-            if traverse == "n": 
+            choice = input("\n[which location (n,s,e,w)]")
+
+            if choice == "n": 
                 y -= 1
-                location = (tile[direction].start_text())
-                # print(location)
-                # utilities.slowPrint(location)
                 if (y < 1):
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)
                     y +=1
 
                 else:
-                    direction = (mapMatrix[y, x])
-                    # print(direction)
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)
-            elif traverse == "s":
+                    location = (mapMatrix[y, x])
+                    # print(location)
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)
+            elif choice == "s":
                 y += 1
                 if (y > mapMatrix.shape[0]-2):
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)                   
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)                   
                     y -= 1
 
                 else:        
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)
-            elif traverse == "w":
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)
+            elif choice == "w":
                 x -= 1
                 if (x < 1):
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)                   
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)                   
                     x += 1
 
                 else:
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)
-            elif traverse == "e":
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)
+            elif choice == "e":
                 x += 1
                 if (x > mapMatrix.shape[1]-2):
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)                    
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)                    
                     x -= 1
 
                 else:
-                    direction = (mapMatrix[y, x])
-                    location = (tile[direction].start_text())
-                    utilities.slowPrint(location)
-            elif traverse == "map":
+                    location = (mapMatrix[y, x])
+                    output = (tile[location].start_text())
+                    utilities.slowPrint(output)
+            elif choice == "map":
                 playermap[y,x]="O"
                 print(playermap)
                 playermap = None
             else:
-                print ("invalid direction")
-        
-        # mapMatrix = buildMap.assign_tiles()
-        # tile = buildMap.tile_dict()
-        # print(buildMap.assign_tiles())
-        # x = 0
-        # y = 1
-        # traverse = input("\n[which way (n,s,e,w)]")
-        # while True:
-        #     traverse = input("\n[which way (n,s,e,w)]")
-        #     if traverse == "n":
-        #         y -= 1
-        #         direction = (mapMatrix[y, x])
-        #         print(direction)
-        #         location = (tile[direction].start_text())
-        #         output = utilities.slowPrint(location)
-        #     elif traverse == "s":
-        #         y += 1
-        #         direction = (mapMatrix[y, x])
-        #         print(direction)
-        #         location = (tile[direction].start_text())
-        #         output = utilities.slowPrint(location)
-        #     elif traverse == "w":
-        #         x -= 1
-        #         direction = (mapMatrix[y, x])
-        #         print(direction)
-        #         location = (tile[direction].start_text())
-        #         output = utilities.slowPrint(location)
-        #     elif traverse == "e":
-        #         x += 1
-        #         direction = (mapMatrix[y, x])
-        #         print(direction)
-        #         location = (tile[direction].start_text())
-        #         output = utilities.slowPrint(location)
-        #     elif traverse == "map":
-        #         print(mapMatrix)
-        #     else:
-        #         output = "invalid direction"
-        #         utilities.slowPrint(output)
+                print ("invalid location")
+
             

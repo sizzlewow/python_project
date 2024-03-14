@@ -19,7 +19,7 @@ class OpeningTile():
         intro = ('Welcome to your life.'
                '\n'
                '\nYou have hit rock bottom, and are rebuilding from scratch...'
-                )
+                '\n')
         utilities.slowPrint(intro)
 class TavernTile():
     
@@ -50,40 +50,39 @@ class TavernTile():
             elif choice not in ["stay", "leave"]:
                 utilities.slowPrint("I can't just stand here...\n")
 
-
-    
+  
 class JobBoard():
 
     def start_text():
-        return (
-                'You track down the job board, \"...got here too late\",'
-                '\nyou grumble; realizing you did this to yourself'
-                '\nYou find two jobs posted:'
+        jobs_status = (
+                'You track down the job board.\n'
+                '...got here too late.\n'
+                'You find two jobs posted.\n'
                 )
+        return (random.choice(jobs_status))
 
     def bakery():
-        return (
-                'BAKERY IN SEARCH OF WIZARD...'
-                )
+        return ('BAKERY IN SEARCH OF WIZARD...\n')
+                
     def butcher():
-        return (
-                'BUTCHER NEEDS RAT CATCHER!'
-                )
+        return ('BUTCHER NEEDS RAT CATCHER!\n')
     
 class DoogansBakery():
 
     def start_text():
-        return (
-                'Welcome to Doogan\'s Bakery!  What can we get for you?'
+        bakery_status = ('You smell fresh baked bread, must be a bakery!\n'
+                'Welcome to Doogan\'s Bakery!  What can we get for you?\n'
                 )
+        return (random.choice(bakery_status))
 
 class ManksMeats():
 
     def start_text():
-        return (
-                'Just a minute...er..Welcome to Mank\'s Meats!'
-                'What do you need?'
-                )
+        butcher_status = (
+                        'Just a minute...er..Welcome to Mank\'s Meats!\n'
+                        'Lookin for meat?\n'
+                        )
+        return (random.choice(butcher_status))
 
 class StreetTile():
    
@@ -115,7 +114,7 @@ class buildMap():
     def assign_tiles():
         tile_map = [["EE","EE","EE","EE","EE","EE","EE"],
                     ["EE","ST","ST","ST","ST","ST","EE"],
-                    ["EE","OT","ST","ST","ST","DB","EE"],
+                    ["EE","ST","ST","ST","ST","DB","EE"],
                     ["EE","TT","JB","ST","MM","ST","EE"],
                     ["EE","EE","EE","EE","EE","EE","EE"]]
         mapMatrix = np.array(tile_map, dtype='str_')

@@ -7,6 +7,6 @@ class utilities():
         while True:
             for char in (self):
                 print(char, end='', flush=True)
-                time.sleep(0.05)
+                time.sleep(0.025)
             break            
             
