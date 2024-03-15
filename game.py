@@ -2,12 +2,15 @@
 # numpy to build playermap
 # helper for utility functions to improve ui
 # player for user data and state
-
+import logging
 import numpy as np
 from helper import utilities
 from player import User
 
-
+logging.basicConfig(filename="pylog.log", format='%(asctime)s %(name)s %(levelname)s %(message)s',
+                    filemode='w')
+logger = logging.getLogger("game")
+logger.setLevel(logging.DEBUG)
 # GameMenu requests the user enter a name, greets them with that name, 
 # then presents a status list and requires entry of the name entered to continue.
 
@@ -27,6 +30,7 @@ class GameMenu:
             if input("Enter your name and press enter to continue") == User.name:
                 Movement.where_to()
             else:
+                logger.info("User forgot name")
                 print("Do you not even know your name?")
 
 
@@ -49,6 +53,7 @@ class Movement:
             if choice == "n":
                 y -= 1
                 if (y < 1):
+                    logger.warning("Attempted leave map.")
                     location = (mapMatrix[y, x])
                     tile[location].start() 
                     y +=1
@@ -60,6 +65,7 @@ class Movement:
             elif choice == "s":
                 y += 1
                 if (y > mapMatrix.shape[0]-2):
+                    logger.warning("Attempted leave map.")
                     location = (mapMatrix[y, x])
                     tile[location].start()                  
                     y -= 1
@@ -71,6 +77,7 @@ class Movement:
             elif choice == "w":
                 x -= 1
                 if (x < 1):
+                    logger.warning("Attempted leave map.")
                     location = (mapMatrix[y, x])
                     tile[location].start()
                     x += 1
@@ -81,6 +88,7 @@ class Movement:
             elif choice == "e":
                 x += 1
                 if (x > mapMatrix.shape[1]-2):
+                    logger.warning("Attempted leave map.")
                     location = (mapMatrix[y, x])
                     tile[location].start()                  
                     x -= 1
@@ -97,6 +105,7 @@ class Movement:
                     location = (mapMatrix[y, x])
                     tile[location].start()                
             else:
+                logger.error("Invalid input")
                 print ("invalid location")
 
             
