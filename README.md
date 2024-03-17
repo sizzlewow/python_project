@@ -29,12 +29,8 @@ h3. Software Requirements:
 * OS: Windows 10 or later, Ubuntu workstation or Server 22.04.
 * VSCode (other text editors could be used, but VSCode may be preferable)
 * Python 3
-** PIP
-* Modules (not including my own):
-* logging
-* random
-* numpy
-* time
+* PIP
+** numpy
 
 
 
@@ -49,21 +45,21 @@ h3. Installation and Configuration:
 h3. Code Documentation:
 
 h4. main.py:
-** Starts the game:
-*** Prints 300 newlines to clear screen, then calls GameMenu.new_char function from game module.
-*** Once this is complete, GameMenu.main_menu is called from game module.
+* Starts the game:
+** Prints 300 newlines to clear screen, then calls GameMenu.new_char function from game module.
+** Once this is complete, GameMenu.main_menu is called from game module.
 
 h4. world.py
-** Defines the world the player moves around in.  
+* Defines the world the player moves around in.  
 \\ Contains classes for each tile type, defining the behaviors and attributes of each,
 \\ including flavor text and menu/decision loops.
-** Generates a 2D array or matrix which is referenced during player movement within the world.
-** Assigns values to each index of the array.
+* Generates a 2D array or matrix which is referenced during player movement within the world.
+* Assigns values to each index of the array.
 \\ each element matches a key in the dictionary in "tile_dict"
 \\ The value assigned to each key is the associated class in the module.
 \\ The array is built using numpy.array because it allows for some helpful functions,
 \\ such as assigning the data type of elements in the array.
-*** You can modify the game map by adding rows or columns to tile_map in buildMap
+** You can modify the game map by adding rows or columns to tile_map in buildMap
 \\ and editing the key/value pairs in tile_types in buildMap
 \\ (ensure that the key exists in the map array, and the value aligns to an existing class)
 
