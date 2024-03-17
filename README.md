@@ -81,6 +81,6 @@ a character at a time as though it were being typed.  Just provides a more inter
 Logging is facilitated via the logging module.  At various stages within game.py, 
 if the user attempts to perform an illegal move or provides an invalid input, the event is logged to a file called pylog.log in the script directory.
 
-No AI or LLM was utilized of during the creation of this game.  Any similarities might suggest that I am, in fact, SkyNet.
+No AI or LLM was utilized during the creation of this game.  Any similarities might suggest that I am, in fact, SkyNet..and should reflect poorly on AI in general.
 
 

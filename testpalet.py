@@ -8,9 +8,3 @@
 #     k = dictionary[i]
 #     print(k[0])
 
-
-a=input("1")
-b=input("2")
-c=len(b)*2
-
-print(a/c)
