@@ -20,6 +20,7 @@ class OpeningTile:
         '\n'
         '\nYou have hit rock bottom, and are rebuilding from scratch...'
         '\n')
+    
     def start():
         print("\n"*300)
         if User.state == True:    
@@ -131,8 +132,6 @@ class EdgeEnd:
         print("\n"*300)
         print(random.choice(EdgeEnd.status))
     
-
-
 # The buildMap class contains functions to generate the map and facilitate associating
 # the above classes with their respecitive positions on it.
 # I have used numpy.array to build the matrix, though it probably wasn't entirely needed.

@@ -18,6 +18,7 @@ class BarTender:
     leave = "...actually, I really shouldn't."
 
     def choice():
+        
         while True:
             choice = int(input("How many should I have? "))
 

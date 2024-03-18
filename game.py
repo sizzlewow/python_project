@@ -2,6 +2,7 @@
 # numpy to build playermap
 # helper for utility functions to improve ui
 # player for user data and state
+
 import logging
 import numpy as np
 from helper import utilities
@@ -11,6 +12,7 @@ logging.basicConfig(filename="pylog.log", format='%(asctime)s %(name)s %(levelna
                     filemode='w')
 logger = logging.getLogger("game")
 logger.setLevel(logging.DEBUG)
+
 # GameMenu requests the user enter a name, greets them with that name, 
 # then presents a status list and requires entry of the name entered to continue.
 
