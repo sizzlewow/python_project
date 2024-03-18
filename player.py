@@ -7,12 +7,12 @@ class User:
     x = 2
     state = False
     name = None
-    # def __init__(self, name):
-    #     self.name = name
+    def __init__(self, name):
+        self.name = name
 
-    # def start_position(cls, y, x):
-    #     cls.y = y
-    #     cls.x = x
+    def start_position(cls, y, x):
+        cls.y = y
+        cls.x = x
 
     def playerstate(cls, arg):
         cls.state = arg
