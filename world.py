@@ -120,7 +120,7 @@ class StreetTile:
         print("\n"*300)
         utilities.slowPrint(random.choice(StreetTile.status))
     
-class EdgeEnd:
+class Boundary:
 
     status = (
             "I can't go any further...",
@@ -130,7 +130,7 @@ class EdgeEnd:
 
     def start():
         print("\n"*300)
-        print(random.choice(EdgeEnd.status))
+        print(random.choice(Boundary.status))
     
 # The buildMap class contains functions to generate the map and facilitate associating
 # the above classes with their respecitive positions on it.
@@ -141,9 +141,9 @@ class buildMap():
 
     def assign_tiles():
         tile_map = [["EE","EE","EE","EE","EE","EE","EE"],
-                    ["EE","ST","ST","ST","ST","ST","EE"],
-                    ["EE","OT","ST","ST","ST","DB","EE"],
-                    ["EE","TT","JB","ST","MM","ST","EE"],
+                    ["EE","  ","  ","  ","  ","  ","EE"],
+                    ["EE","OT","  ","  ","  ","DB","EE"],
+                    ["EE","TT","JB","  ","MM","  ","EE"],
                     ["EE","EE","EE","EE","EE","EE","EE"]]
         mapMatrix = np.array(tile_map, dtype='str_')
         return mapMatrix
@@ -155,8 +155,8 @@ class buildMap():
         "JB": JobBoard,
         "DB": DoogansBakery,
         "MM": ManksMeats,
-        "ST": StreetTile,
-        "EE": EdgeEnd
+        " ": StreetTile,
+        "EE": Boundary,
         }
         return tile_types
 
