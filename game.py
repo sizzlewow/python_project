@@ -3,19 +3,19 @@
 # helper for utility functions to improve ui
 # player for user data and state
 
-import logging
 import re
 import numpy as np
+from world import BuildMap
 from helper import utilities
 from player import User
 
-logging.basicConfig(filename="pylog.log", format='%(asctime)s %(name)s %(levelname)s %(message)s',
-                    filemode='w')
-logger = logging.getLogger("game")
-logger.setLevel(logging.DEBUG)
-
 # GameMenu requests the user enter a name, greets them with that name, 
 # then presents a status list and requires entry of the name entered to continue.
+mapMatrix = BuildMap.assign_tiles()
+tile = BuildMap.tileDict
+
+
+# location = (mapMatrix[y, x])
 
 class GameMenu:
 
@@ -25,98 +25,118 @@ class GameMenu:
         utilities.slowPrint("Time for an adventure," + User.name + "!")
     
     def main_menu():
+        location = (mapMatrix[User.y, User.x])
+        print(tile[location].name)
         print("Name: ", User.name)
         print(User.state)
         print("Current coords: ", User.y, User.x)
         
-        while True:
-            if input("Enter your name and press enter to continue") == User.name:
-                Movement.where_to()
-            else:
-                logger.info("User forgot name")
-                print("Do you not even know your name?")
 
 
 # Movement Class currently only contains one function to facilitate movement around the map.
                                
 class Movement:
-    from world import buildMap
-    mapMatrix = buildMap.assign_tiles() # 2d Array used for game map
-    
-    tile = buildMap.tile_dict() # Dictionary containing worldmap class names and abbreviated keys.
-    y, x = User.y, User.x # Player starting coords, stored in player module
-    location = (mapMatrix[y, x]) # Abbreviated tile name on map.
-    distance = int(None)
     
     def where_to():
-
-        playerinput = input("direction and distance: ")
-        sepinput = re.split('(\d+)',playerinput)
+        y, x = User.y, User.x
         
-            
+        playermap = np.copy(mapMatrix) # Copy of worldmap updated to show player location.
+         # Dictionary containing worldmap class names and abbreviated keys.
+        # mapMatrix = buildMap.assign_tiles() # 2d Array used for game map
+        # Abbreviated tile name on map.
+        
+        sepinput = re.findall(r"(\D+|\d+)",playerinput)
+        direction = sepinput[0]
 
-        playermap = np.copy(Movement.mapMatrix) # Copy of worldmap updated to show player location.
-            
+        
+        if direction == "map":
+            playermap[y,x]="@ "
+            print(playermap)
+            playermap = None
 
-            
-                
+        elif len(sepinput) == 2 and direction in '^[nsew]$':
+            dist = int(sepinput[1])
+            if direction == "n":
+                for _ in range(dist):
+                    y -= 1
+                    location = mapMatrix[y,x]
+                    if tile[location].canEnter == False or (y < 1):
+                        y +=1
+                        break
+                    elif tile[location].empty == False:
+                        break
+                    
 
-            # if direction == "n":
-            #     y -= 1
-            #     if (y < 1):
-            #         logger.warning("Attempted leave map.")
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start() 
-            #         y +=1
+            elif direction == "s":
+                for _ in range(dist):
+                    y += 1
+                    location = mapMatrix[y,x]
+                    if tile[location].canEnter == False or (y > mapMatrix.shape[0]-2):
+                        y -= 1
+                        break
+                    elif tile[location].empty == False:
+                        break
+                    
 
-            #     else:
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()
+            elif direction == "w":
+                for _ in range(dist):
+                    x -= 1
+                    location = mapMatrix[y,x]
+                    if tile[location].canEnter == False or (x < 1):
+                        x +=1
+                        break
+                    elif tile[location].empty == False:
+                        break
+                    
 
-            # elif direction == "s":
-            #     y += 1
-            #     if (y > Movement.mapMatrix.shape[0]-2):
-            #         logger.warning("Attempted leave map.")
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()                  
-            #         y -= 1
+            elif direction == "e":
+                for _ in range(dist):
+                    x += 1
+                    location = mapMatrix[y,x]
+                    if tile[location].canEnter == False or (x > mapMatrix.shape[0]-2):
+                        x -= 1
+                        break
+                    elif tile[location].empty == False:
+                        break
+                    
+                    
+            if (y,x) == (User.y,User.x):
+                print("You haven't moved...")
 
-            #     else:        
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()
- 
-            # elif direction == "w":
-            #     x -= 1
-            #     if (x < 1):
-            #         logger.warning("Attempted leave map.")
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()
-            #         x += 1
+            else:
+                User.y, User.x = y, x
+                location = (mapMatrix[User.y, User.x])
+                tile[location].start()
+        else:
+            print ("invalid input")
 
-            #     else:
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()
-            # elif direction == "e":
-            #     x += 1
-            #     if (x > Movement.mapMatrix.shape[1]-2):
-            #         logger.warning("Attempted leave map.")
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()                  
-            #         x -= 1
+    def look_around():
+        y,x = User.y,User.x
+        if "north" in playerinput:
+            location = mapMatrix[y-1,x]
+            print("You see the " + tile[location].name)
+        elif "south" in playerinput:
+            location = mapMatrix[y+1,x]
+            print("You see the " + tile[location].name)
+        elif "east" in playerinput:
+            location = mapMatrix[y,x+1]
+            print("You see the " + tile[location].name)
+        elif "west" in playerinput:
+            location = mapMatrix[y,x-1]
+            print("You see the " + tile[location].name)
+        else: 
+            print("not sure what you mean...")
 
-            #     else:
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()
-            # elif direction == "map":
-            #     print("\n"*300)
-            #     playermap[y,x]="O"
-            #     print(playermap)
-            #     playermap = None
-            # elif direction == "":
-            #         location = (Movement.mapMatrix[y, x])
-            #         Movement.tile[location].start()                
-            # else:
-            #     logger.error("Invalid input")
-            #     print ("invalid location")
 
-            
+
+
+while True:
+    playerinput = input("What do?").lower()
+    if playerinput == 'menu':
+        GameMenu.main_menu()
+    elif "look" in playerinput:
+        Movement.look_around()
+    elif playerinput == 'quit':
+        break
+    elif re.match('^[nsew][0-9]+$',playerinput) or playerinput == 'map':
+        Movement.where_to()

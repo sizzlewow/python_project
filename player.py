@@ -3,10 +3,13 @@
 #Holds player state during runtime, or default state otherwise.
 
 class User:
+
     y = 2
     x = 2
     state = False
     name = None
+    location = None
+    
     def __init__(self, name):
         self.name = name
 

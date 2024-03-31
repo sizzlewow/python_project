@@ -8,20 +8,15 @@ from player import User
 class BarTender:
     
     onedrink = "I think one is enough, don't want to get drunk..."
-
     twodrinks = "Two shouldn't hurt anything...I can handle it."
-
     threedrinks = "I've got nothing better to do, may as well have fun!"
-
     manydrinks = "The bartender cut you off after you passed out at the bar..."
-
     leave = "...actually, I really shouldn't."
 
     def choice():
         
         while True:
             choice = int(input("How many should I have? "))
-
             if not isinstance(choice, int):
                 print("invalid input\n")
                 continue
