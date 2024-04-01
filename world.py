@@ -16,7 +16,7 @@ from player import User
 
 class OpeningTile:
 
-    name = ""
+    name = "street"
     empty = True
     canEnter = True
     intro = ('Welcome to your life.'
@@ -83,9 +83,9 @@ class JobBoard:
     empty = True
     canEnter = True
     status = (
-            'You track down the job board.',
-            '...got here too late.',
-            'You find two jobs posted.'
+            "You track down the job board.",
+            "...got here too late, job options are limited",
+            "You find two jobs posted."
             )
     job1 = "BAKERY IN SEARCH OF WIZARD!"
     job2 = "BUTCHER NEEDS RAT CATCHER!"
@@ -116,8 +116,8 @@ class DoogansBakery:
     empty = False
     canEnter = True
     status = (
-            'You smell fresh baked bread, must be a bakery!',
-            'Welcome to Doogan\'s Bakery!  What can we get for you?'
+            "You smell fresh baked bread, must be a bakery!",
+            "Welcome to Doogan's Bakery!  What can we get for you?"
             )
     
     @classmethod
@@ -137,8 +137,8 @@ class ManksMeats:
     empty = False
     canEnter = True
     status = (
-            'Just a minute...er..Welcome to Mank\'s Meats!',
-            'Lookin for meat?'
+            "Just a minute...er..Welcome to Mank's Meats!",
+            "Lookin for meat?"
             )
     
     @classmethod
@@ -157,9 +157,9 @@ class StreetTile:
     empty = True
     canEnter = True
     status = (
-            'The street is bustling with busy folks',
-            'The street is oddly empty right now, perhaps the hive-mind decided to stay home',
-            'The street is alive with celebration, did I forget about a holiday?'
+            "The street is bustling with busy folks",
+            "The street is oddly empty right now, perhaps the hive-mind decided to stay home",
+            "The street is alive with celebration, did I forget about a holiday?"
             )
     
     @classmethod

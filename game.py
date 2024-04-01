@@ -21,14 +21,15 @@ class GameMenu:
 
     def new_char():
         newname = input("What is your name?\n")
+        player = input("which slot? ")
+
         User.player_name(User,newname)
         utilities.slowPrint("Time for an adventure," + User.name + "!")
     
     def main_menu():
         location = (mapMatrix[User.y, User.x])
-        print(tile[location].name)
+        print("Location: ", tile[location].name)
         print("Name: ", User.name)
-        print(User.state)
         print("Current coords: ", User.y, User.x)
         
 
@@ -134,6 +135,8 @@ while True:
     playerinput = input("What do?").lower()
     if playerinput == 'menu':
         GameMenu.main_menu()
+    elif playerinput == "name":
+        GameMenu.new_char()
     elif "look" in playerinput:
         Movement.look_around()
     elif playerinput == 'quit':
